@@ -1,0 +1,6 @@
+{
+  "name": "Core - HTML5 Defensive Game",
+  "description": "A clone of Hakim El Hattab's Core HTML5 defensive game. Protect the core from incoming red projectiles with your shield while absorbing green energy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

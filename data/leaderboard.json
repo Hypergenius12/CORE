@@ -1,0 +1,79 @@
+[
+  {
+    "id": "hc_1",
+    "nickname": "VortexPilot",
+    "score": 6890,
+    "survivalSec": 142.5,
+    "difficulty": "hardcore",
+    "deflections": 128,
+    "energyAbsorbed": 24,
+    "theme": "matrix",
+    "createdAt": 1790953767045
+  },
+  {
+    "id": "hc_2",
+    "nickname": "ApexCore",
+    "score": 5420,
+    "survivalSec": 121,
+    "difficulty": "hardcore",
+    "deflections": 104,
+    "energyAbsorbed": 19,
+    "theme": "cyberCyan",
+    "createdAt": 1791040167045
+  },
+  {
+    "id": "hc_1791212972265_f5w78",
+    "nickname": "TrueGamer",
+    "score": 5120,
+    "survivalSec": 115.3,
+    "difficulty": "hardcore",
+    "deflections": 92,
+    "energyAbsorbed": 18,
+    "theme": "matrix",
+    "createdAt": 1791212972265
+  },
+  {
+    "id": "hc_3",
+    "nickname": "ShieldRunner",
+    "score": 4780,
+    "survivalSec": 108.4,
+    "difficulty": "hardcore",
+    "deflections": 96,
+    "energyAbsorbed": 16,
+    "theme": "synthwave",
+    "createdAt": 1791126567045
+  },
+  {
+    "id": "hc_4",
+    "nickname": "PulseKnight",
+    "score": 3950,
+    "survivalSec": 92.1,
+    "difficulty": "hardcore",
+    "deflections": 82,
+    "energyAbsorbed": 14,
+    "theme": "solar",
+    "createdAt": 1791162567045
+  },
+  {
+    "id": "hc_5",
+    "nickname": "CyberPhantom",
+    "score": 3410,
+    "survivalSec": 79.6,
+    "difficulty": "hardcore",
+    "deflections": 71,
+    "energyAbsorbed": 12,
+    "theme": "abyssal",
+    "createdAt": 1791191367045
+  },
+  {
+    "id": "hc_6",
+    "nickname": "CoreDef_X",
+    "score": 2980,
+    "survivalSec": 68.3,
+    "difficulty": "hardcore",
+    "deflections": 64,
+    "energyAbsorbed": 10,
+    "theme": "matrix",
+    "createdAt": 1791205767045
+  }
+]
