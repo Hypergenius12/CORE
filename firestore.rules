@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidLeaderboardEntry(data) {
+      return data.keys().hasAll(['nickname', 'score', 'survivalSec', 'difficulty', 'deflections', 'energyAbsorbed', 'createdAt'])
+        && data.keys().hasOnly(['id', 'nickname', 'score', 'survivalSec', 'difficulty', 'deflections', 'energyAbsorbed', 'theme', 'createdAt'])
+        && data.nickname is string && data.nickname.size() >= 1 && data.nickname.size() <= 30
+        && data.score is number && data.score >= 0 && data.score <= 10000000
+        && data.survivalSec is number && data.survivalSec >= 0 && data.survivalSec <= 86400
+        && data.difficulty is string && data.difficulty.size() <= 32
+        && data.deflections is number && data.deflections >= 0
+        && data.energyAbsorbed is number && data.energyAbsorbed >= 0
+        && data.createdAt is number;
+    }
+
+    // Public game leaderboard
+    match /leaderboard/{entryId} {
+      // Anyone can read top scores
+      allow read: if true;
+
+      // Anyone can submit a valid score entry; scores are immutable once created
+      allow create: if isValidId(entryId) && isValidLeaderboardEntry(request.resource.data);
+
+      // Score records cannot be modified or deleted by clients
+      allow update, delete: if false;
+    }
+  }
+}

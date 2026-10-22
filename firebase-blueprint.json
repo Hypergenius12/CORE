@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "A high score entry for the global game leaderboard",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique record identifier"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "Player nickname",
+          "maxLength": 24
+        },
+        "score": {
+          "type": "number",
+          "description": "Final score achieved"
+        },
+        "survivalSec": {
+          "type": "number",
+          "description": "Time survived in seconds"
+        },
+        "difficulty": {
+          "type": "string",
+          "description": "Game difficulty preset"
+        },
+        "deflections": {
+          "type": "number",
+          "description": "Total enemy projectiles deflected"
+        },
+        "energyAbsorbed": {
+          "type": "number",
+          "description": "Total green energy particles absorbed"
+        },
+        "theme": {
+          "type": "string",
+          "description": "Visual theme identifier"
+        },
+        "createdAt": {
+          "type": "number",
+          "description": "Creation timestamp in milliseconds"
+        }
+      },
+      "required": [
+        "nickname",
+        "score",
+        "survivalSec",
+        "difficulty",
+        "deflections",
+        "energyAbsorbed",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/leaderboard/{entryId}": {
+      "schema": "LeaderboardEntry",
+      "description": "Global hardcore and standard leaderboard entries"
+    }
+  }
+}

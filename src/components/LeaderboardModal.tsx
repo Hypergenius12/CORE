@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { LeaderboardEntry } from '../types';
 import { X, Trophy, RefreshCw, User, Shield, Zap, Clock, Search, Flame, CheckCircle2 } from 'lucide-react';
 
+import { getGlobalLeaderboard } from '../leaderboardService';
+
 interface LeaderboardModalProps {
   currentNickname: string;
   onUpdateNickname: (name: string) => void;
@@ -27,17 +29,8 @@ export function LeaderboardModal({
     setLoading(true);
     setError(null);
     try {
-      const url = new URL('/api/leaderboard', window.location.origin);
-      url.searchParams.set('sort', sortBy);
-
-      const res = await fetch(url.toString());
-      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-      const data = await res.json();
-      if (data.success && Array.isArray(data.leaderboard)) {
-        setEntries(data.leaderboard);
-      } else {
-        throw new Error('Invalid response structure');
-      }
+      const data = await getGlobalLeaderboard(sortBy);
+      setEntries(data);
     } catch (err: unknown) {
       console.error('Failed to fetch leaderboard:', err);
       setError('Could not connect to leaderboard service. Displaying cached records.');

@@ -21,6 +21,8 @@ import { LeaderboardModal } from './components/LeaderboardModal';
 import { HUD } from './components/HUD';
 import { PauseModal } from './components/PauseModal';
 import { GameOverModal } from './components/GameOverModal';
+import { submitGlobalScore } from './leaderboardService';
+import { testConnection } from './firebase';
 
 interface Point2D {
   x: number;
@@ -407,24 +409,18 @@ export default function App() {
     }
 
     try {
-      const res = await fetch('/api/leaderboard', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nickname: settings.nickname || 'Pilot',
-          score: finalScore,
-          survivalSec,
-          difficulty: 'hardcore',
-          deflections: gameStateRef.current.roundDeflections,
-          energyAbsorbed: gameStateRef.current.roundEnergyAbsorbed,
-          theme: settings.theme,
-        }),
+      const res = await submitGlobalScore({
+        nickname: settings.nickname || 'Pilot',
+        score: finalScore,
+        survivalSec,
+        difficulty: 'hardcore',
+        deflections: gameStateRef.current.roundDeflections,
+        energyAbsorbed: gameStateRef.current.roundEnergyAbsorbed,
+        theme: settings.theme,
+        createdAt: Date.now(),
       });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.rank) {
-          setRoundStats((prev) => ({ ...prev, globalRank: data.rank }));
-        }
+      if (res && res.rank) {
+        setRoundStats((prev) => ({ ...prev, globalRank: res.rank }));
       }
     } catch (err) {
       console.error('Failed to submit score to leaderboard:', err);
@@ -520,6 +516,7 @@ export default function App() {
 
   // Setup event handlers and animation loop
   useEffect(() => {
+    testConnection();
     handleResize();
     window.addEventListener('resize', handleResize);
 
